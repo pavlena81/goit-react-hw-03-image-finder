@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { toast } from "react-toastify";
+
 import {
     HeaderSearchbar,
     SearchForm,
@@ -8,17 +10,22 @@ import {
 } from "./Searchbar.styled";
 
 export class Searchbar extends Component {
-//   state = {
-//     query: "",
-//   };
+  state = {
+    query: "",
+  };
 
 handleInput = (e) => {
   this.setState({ query: e.currentTarget.value.trim() });
 };
 
 handleSubmit = (e) => {
-  e.preventDefault();
-  this.props.onSubmit(this.state.query);
+    e.preventDefault();
+    if (this.state.query.trim() === '') {
+        return toast.error('enter search');
+   } 
+
+    this.props.onSubmit(this.state.query);
+    this.setState({query: ''})
 };
 
   render() {
@@ -32,7 +39,7 @@ handleSubmit = (e) => {
     <SearchFormInput
       onChange={this.handleInput}
       type="text"
-       value={this.value}
+       value={this.state.query}
       autocomplete="off"
       autoFocus
       placeholder="Search images and photos"

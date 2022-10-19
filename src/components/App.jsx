@@ -1,20 +1,13 @@
 import { Component } from "react";
-// import axios from "axios";
+import axios from "axios";
+
+import {getImages} from 'service/service';
+import { ToastContainer } from 'react-toastify';
 
 import { Searchbar } from './Searchbar/Searchbar';
 
-// const API_KEY = '29581970-ca9e55c9ea9a40620816915df';
 
-// const ImagesList = ({ images }) => (
-//   <ul>
-//     {images.length > 0 &&
-//           images.map(({ id, webformatURL, largeImageURL }) => (
-//       <li key={id}>
-//         <img src={largeImageURL} alt={alt} />        
-//       </li>
-//     ))}
-//   </ul>
-// );
+
 
 export class App extends Component {
 
@@ -25,9 +18,51 @@ export class App extends Component {
     isLoading: false,
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({
+      page: 1,
+      query: e.target.elements.query.value,
+      images: [],
+    });
+    e.target.reset();
+  }
+
+  loadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+      isLoading: true,
+    }));
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { query, page } = this.state;
+    if (
+      prevState.page !== this.state.page ||
+      prevState.query !== this.state.query
+    ) {
+      console.log('didUpdate');
+      this.getPhotos(query, page);
+    }
+  }
+
+  getPhotos = async (query, page) => {
+    if (!query) {
+      return;
+    }
+    try {
+      const response = await getImages(query, page);
+      const images = response.hits;
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+
   // async componentDidMount() {
   //   this.setState({ isLoading: true });
-  //   const response = await axios.get(`https://pixabay.com/api/?key=${API_KEY}&q=${value}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=12`);
+  //   const response = await getImages(query, page);
   //   this.setState({
   //     images: response.data.hits,
   //     isLoading: false,
@@ -40,7 +75,8 @@ export class App extends Component {
       <div>
         
       <Searchbar />
-         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
+        {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
+        <ToastContainer autoClose={3000} />
       </div>
     );
   }
