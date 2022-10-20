@@ -53,6 +53,11 @@ export class App extends Component {
     try {
       const response = await getImages(query, page);
       const images = response.hits;
+
+      this.setState(({ images }) => ({
+        images: [...images],
+      }));
+
     } catch (error) {
       this.setState({ error });
     } finally {
@@ -74,7 +79,8 @@ export class App extends Component {
     return (
       <div>
         
-      <Searchbar />
+        <Searchbar onSubmit={this.handleSubmit} />
+        
         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
         <ToastContainer autoClose={3000} />
       </div>
