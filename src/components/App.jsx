@@ -1,10 +1,11 @@
 import { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 import {getImages} from 'service/service';
 import { ToastContainer } from 'react-toastify';
 
 import { Searchbar } from './Searchbar/Searchbar';
+import { ImageGallery } from "./ImageGallery/ImageGallery.styled";
 
 
 
@@ -52,10 +53,10 @@ export class App extends Component {
     }
     try {
       const response = await getImages(query, page);
-      const images = response.hits;
+      let images = response.hits;
 
-      this.setState(({ images }) => ({
-        images: [...images],
+      this.setState(({ images: prevImages }) => ({
+        images: [...prevImages, ...images],
       }));
 
     } catch (error) {
@@ -65,22 +66,13 @@ export class App extends Component {
     }
   };
 
-  // async componentDidMount() {
-  //   this.setState({ isLoading: true });
-  //   const response = await getImages(query, page);
-  //   this.setState({
-  //     images: response.data.hits,
-  //     isLoading: false,
-  //   });
-  // }
-
-  render() {
+    render() {
     // const { images } = this.state;
     return (
       <div>
         
-        <Searchbar onSubmit={this.handleSubmit} />
-        
+        <Searchbar onSubmit={this.handleSubmit } />
+        <ImageGallery images = {this.state.images}/>
         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
         <ToastContainer autoClose={3000} />
       </div>

@@ -5,7 +5,8 @@ export const ImageGaleryItem = ({ webformatURL, tags }) => (
   
   <ImageGalleryItem key={id}>
     
-        <ImageGalleryItemImage src={webformatURL} alt={tags} />        
+    <ImageGalleryItemImage src={webformatURL}
+                           alt={tags} />        
       
   </ImageGalleryItem>
    
