@@ -1,5 +1,9 @@
 import { Component } from "react";
+
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+import { FaSearch } from "react-icons/fa";
 
 import {
     HeaderSearchbar,
@@ -33,7 +37,7 @@ handleSubmit = (e) => {
   <HeaderSearchbar>
   <SearchForm onSubmit={this.handleSubmit}>
     <SearchFormButton  type="submit">
-      <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+      <SearchFormButtonLabel><FaSearch color = '#3f51b5' />Search</SearchFormButtonLabel>
     </SearchFormButton >
 
     <SearchFormInput

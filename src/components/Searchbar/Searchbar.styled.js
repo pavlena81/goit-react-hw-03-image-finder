@@ -40,7 +40,7 @@ export const SearchFormButton = styled.button`
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -59,15 +59,8 @@ export const SearchFormButton = styled.button`
 // }
 
 export const SearchFormButtonLabel = styled.span`
-    color: #3f51b5;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    clip-path: inset(50%);
+    
+    color: #3f51b5;    
     border: 0;
     `
 
@@ -76,9 +69,10 @@ export const SearchFormInput = styled.input`
     width: 100%;
     font: inherit;
     font-size: 20px;
+    color: #3f51b5;  
     border: none;
     outline: none;
-    padding-left: 4px;
+    padding-left: 10px;
     padding - right: 4px;
 
      &::placeholder {
