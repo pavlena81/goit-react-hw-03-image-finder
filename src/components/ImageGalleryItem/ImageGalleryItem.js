@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { ImageGalleryItem, ImageGalleryItemImage } from './ImageGalleryItem.styled';
 
-export const ImageGaleryItem = ({ webformatURL, tags }) => {
+export const ImageGalleryItems = ({ webformatURL, tags }) => {
   return (
-    <ImageGalleryItem key={id}>
+    <ImageGalleryItem>
     
       <ImageGalleryItemImage src={webformatURL}
-        alt={tags} />
+                              alt={tags} />
       
     </ImageGalleryItem>
   ); 
@@ -17,7 +17,7 @@ export const ImageGaleryItem = ({ webformatURL, tags }) => {
 
 
 
-ImageGaleryItem.propTypes = {
+ImageGalleryItems.propTypes = {
   webformatURL: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
 }

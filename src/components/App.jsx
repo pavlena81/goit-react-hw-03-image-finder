@@ -5,7 +5,7 @@ import {getImages} from 'service/service';
 import { ToastContainer } from 'react-toastify';
 
 import { Searchbar } from './Searchbar/Searchbar';
-import { ImageGallery } from "./ImageGallery/ImageGallery.styled";
+import { ImageGallery } from "./ImageGallery/ImageGallery"; 
 
 
 

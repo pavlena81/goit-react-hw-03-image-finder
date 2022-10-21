@@ -1,27 +1,31 @@
 import PropTypes from 'prop-types';
 
-import { ImageGallery } from './ImageGallery.styled';
-import { ImageGalleryItemImage } from 'components/ImageGalleryItem/ImageGalleryItem'; 
+import { ImageGalleryList } from './ImageGallery.styled';
+import { ImageGalleryItems } from 'components/ImageGalleryItem/ImageGalleryItem'; 
 
 export const ImageGallery = ({ images }) => {
   return (
-    <ul>
+    <ImageGalleryList>
       {images.length > 0 &&
         images.map(({ id, largeImageURL }) => (
-          <ImageGallery >
-            <ImageGalleryItemImage
+          
+            <ImageGalleryItems
               key={id}
               largeImageURL={largeImageURL}
             />
-          </ImageGallery>
+          
         ))}
-    </ul>
+    </ImageGalleryList>
   );
 };
 
 
 ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  )
   
-  id: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
 }
