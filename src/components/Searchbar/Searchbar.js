@@ -15,27 +15,22 @@ import {
 } from "./Searchbar.styled";
 
 export class Searchbar extends Component {
+  
   state = {
-    query: '',
+    searchInput: '',
   };
 
 handleInput = (e) => {
-  this.setState({ query: e.currentTarget.value.trim() });
+  this.setState({ searchInput: e.target.value.trim() });
 };
 
-handleSubmit = (e) => {
-   e.preventDefault();
+handleSubmit = (e) => {  
    
-    if (this.state.query.trim() === '') {
+    if (this.state.searchInput.trim() === '') {
         return toast.error('enter search');
    } 
 
-    //  this.props.onSubmit(this.state.query);
-  this.setState({
-    query: '',
-    
-    
-  })
+    this.props.onSubmit(this.state.searchInput)
 };
 
   render() {
@@ -49,10 +44,11 @@ handleSubmit = (e) => {
     <SearchFormInput
       onChange={this.handleInput}
       type="text"
-       value={this.state.query}
+      value={this.state.searchInput}
       autocomplete="off"
       autoFocus
       placeholder="Search images and photos"
+      
     />
   </SearchForm>
 </HeaderSearchbar>

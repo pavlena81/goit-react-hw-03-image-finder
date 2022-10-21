@@ -20,13 +20,13 @@ export class App extends Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
+    
     this.setState({
       page: 1,
-      query: e.target.elements.query.value,
+      query: e.searchInput,
       images: [],
     });
-    e.target.reset();
+    // e.target.reset();
   }
 
   loadMore = () => {
@@ -36,27 +36,27 @@ export class App extends Component {
     }));
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
     if (
-      prevState.page !== this.state.page ||
-      prevState.query !== this.state.query
+      prevState.page !== page ||
+      prevState.query !== query
     ) {
-      console.log('didUpdate');
+      console.log('query');
       this.getPhotos(query, page);
     }
   }
 
-  getPhotos = async (query, page) => {
+  getPhotos = async (query, page) => {    
     if (!query) {
       return;
     }
     try {
-      const response = await getImages(query, page);
-      let images = response.hits;
+      const data = await getImages(query, page);
+      
 
-      this.setState(({ images: prevImages }) => ({
-        images: [...prevImages, ...images],
+      this.setState(state => ({
+        images: [ state.images, ...data.hits],
       }));
 
     } catch (error) {
