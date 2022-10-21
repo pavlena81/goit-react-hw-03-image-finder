@@ -19,12 +19,10 @@ export class App extends Component {
     isLoading: false,
   };
 
-  handleSubmit = e => {
+  handleSubmit = searchInput => {
     
     this.setState({
-      page: 1,
-      query: e.searchInput,
-      images: [],
+      searchInput
     });
     // e.target.reset();
   }

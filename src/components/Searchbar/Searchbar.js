@@ -30,7 +30,8 @@ handleSubmit = (e) => {
         return toast.error('enter search');
    } 
 
-    this.props.onSubmit(this.state.searchInput)
+  this.props.onSubmit(this.state.searchInput)
+  console.log(this.state.searchInput)
 };
 
   render() {
@@ -38,7 +39,7 @@ handleSubmit = (e) => {
   <HeaderSearchbar>
   <SearchForm onSubmit={this.handleSubmit}>
     <SearchFormButton  type="submit">
-      <SearchFormButtonLabel><FaSearch color = '#3f51b5' />Search</SearchFormButtonLabel>
+      <SearchFormButtonLabel><FaSearch color = '#3f51b5' /></SearchFormButtonLabel>
     </SearchFormButton >
 
     <SearchFormInput

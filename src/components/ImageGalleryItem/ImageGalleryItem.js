@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import { ImageGalleryItem, ImageGalleryItemImage } from './ImageGalleryItem.styled';
 
-export const ImageGaleryItem = ({ webformatURL, tags }) => (
-  
-  <ImageGalleryItem key={id}>
+export const ImageGaleryItem = ({ webformatURL, tags }) => {
+  return (
+    <ImageGalleryItem key={id}>
     
-    <ImageGalleryItemImage src={webformatURL}
-                           alt={tags} />        
+      <ImageGalleryItemImage src={webformatURL}
+        alt={tags} />
       
-  </ImageGalleryItem>
-   
+    </ImageGalleryItem>
+  ); 
   
-);
+};
 
 
 

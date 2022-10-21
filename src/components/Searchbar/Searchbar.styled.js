@@ -60,7 +60,7 @@ export const SearchFormButton = styled.button`
 
 export const SearchFormButtonLabel = styled.span`
     
-    color: #3f51b5;    
+    color: transparent;    
     border: 0;
     `
 
