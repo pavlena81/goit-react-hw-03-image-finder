@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from "./ImageGallery/ImageGallery"; 
-
+import { Button } from "./Button/Button";
 
 
 
@@ -73,6 +73,7 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSubmit } />
         <ImageGallery images = {this.state.images}/>
         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
+        <Button loadMore={this.loadMore}/>
         <ToastContainer autoClose={3000} />
       </div>
     );
