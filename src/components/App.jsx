@@ -21,10 +21,11 @@ export class App extends Component {
 
   handleSubmit = searchInput => {
     
-    this.setState({
-      searchInput
+    this.setState({      
+      query: searchInput
     });
     // e.target.reset();
+    console.log(searchInput);
   }
 
   loadMore = () => {

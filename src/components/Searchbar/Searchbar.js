@@ -1,5 +1,5 @@
 import { Component } from "react";
-// import PropTypes from 'prop-types';
+ import PropTypes from 'prop-types';
 
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +25,7 @@ handleInput = (e) => {
 };
 
 handleSubmit = (e) => {  
-   
+  e.preventDefault();
     if (this.state.searchInput.trim() === '') {
         return toast.error('enter search');
    } 
@@ -59,7 +59,7 @@ handleSubmit = (e) => {
 
 
 
-// Searchbar.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// }
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  
+}

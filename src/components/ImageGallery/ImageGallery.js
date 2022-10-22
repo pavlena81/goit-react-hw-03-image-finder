@@ -7,11 +7,13 @@ export const ImageGallery = ({ images }) => {
   return (
     <ImageGalleryList>
       {images.length > 0 &&
-        images.map(({ id, largeImageURL }) => (
+        images.map(({ id, webformatURL, largeImageURL, tags}) => (
           
             <ImageGalleryItems
-              key={id}
-              largeImageURL={largeImageURL}
+            key={id}
+            webformatURL = {webformatURL}
+            largeImageURL={largeImageURL}
+            tags ={tags}
             />
           
         ))}
@@ -21,11 +23,5 @@ export const ImageGallery = ({ images }) => {
 
 
 ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      largeImageURL: PropTypes.string.isRequired,
-    })
-  )
-  
+  images: PropTypes.array.isRequired,
 }
