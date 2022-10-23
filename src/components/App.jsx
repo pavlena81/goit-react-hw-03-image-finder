@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from "./ImageGallery/ImageGallery"; 
 import { Button } from "./Button/Button";
+import { Loader } from "./Loader/Loader";
 
 
 
@@ -51,6 +52,8 @@ export class App extends Component {
       return;
     }
     try {
+      this.setState({ isLoading: true });
+
       const data = await getImages(query, page);
       
 
@@ -66,14 +69,16 @@ export class App extends Component {
   };
 
     render() {
-    // const { images } = this.state;
+    const { isLoading } = this.state;
     return (
       <div>
         
-        <Searchbar onSubmit={this.handleSubmit } />
+        <Searchbar onSubmit={this.handleSubmit} />
+        {isLoading && <Loader/>}
         <ImageGallery images = {this.state.images}/>
         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
-        <Button loadMore={this.loadMore}/>
+        <Button loadMore={this.loadMore} />
+        {isLoading && <Loader/>}
         <ToastContainer autoClose={3000} />
       </div>
     );
