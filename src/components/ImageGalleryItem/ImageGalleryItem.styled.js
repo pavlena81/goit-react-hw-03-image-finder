@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ModalImage from "react-modal-image";
  
 export const ImageGalleryItem = styled.li `
   border-radius: 2px;
@@ -6,7 +7,8 @@ export const ImageGalleryItem = styled.li `
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 `
 
-export const ImageGalleryItemImage = styled.img`
+export const ImageGalleryItemImage = styled(ModalImage)`
+  display:block;
   width: 100%;
   height: 260px;
   object-fit: cover;

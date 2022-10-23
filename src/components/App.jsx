@@ -18,11 +18,13 @@ export class App extends Component {
     query: '',
     images: [],
     isLoading: false,
+    showModal: false,
   };
 
   handleSubmit = searchInput => {
     
-    this.setState({      
+    this.setState({  
+      
       query: searchInput
     });
     // e.target.reset();
@@ -58,7 +60,7 @@ export class App extends Component {
       
 
       this.setState(state => ({
-        images: [ state.images, ...data.hits],
+        images: [ ...state.images, ...data.hits],
       }));
 
     } catch (error) {
@@ -68,16 +70,24 @@ export class App extends Component {
     }
   };
 
+    openModal = largeImage => {
+      this.setState({ showModal: true, largeImage });
+      
+    };
+  
+    
+
+
     render() {
-    const { isLoading } = this.state;
+    const { images, isLoading } = this.state;
     return (
       <div>
         
         <Searchbar onSubmit={this.handleSubmit} />
         {isLoading && <Loader/>}
-        <ImageGallery images = {this.state.images}/>
+        <ImageGallery images = {images}/>
         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
-        <Button loadMore={this.loadMore} />
+        {images.length > 12 && <Button loadMore={this.loadMore} />}
         {isLoading && <Loader/>}
         <ToastContainer autoClose={3000} />
       </div>
