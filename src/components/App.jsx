@@ -3,6 +3,8 @@ import { Component } from "react";
 
 import {getImages} from 'service/service';
 import { ToastContainer } from 'react-toastify';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from "./ImageGallery/ImageGallery"; 
@@ -18,7 +20,7 @@ export class App extends Component {
     query: '',
     images: [],
     isLoading: false,
-    showModal: false,
+    total:0,
   };
 
   handleSubmit = searchInput => {
@@ -57,25 +59,31 @@ export class App extends Component {
       this.setState({ isLoading: true });
 
       const data = await getImages(query, page);
-      
+      if (data.hits.length === 0) {
+        toast.warn('Sorry, there are no images matching your search query. Please try again.');
+      }
+      if (page === 1) {
+        this.setState({
+          total: data.total,
+          images: data.hits,
+          isLoading: false,
+        });
 
-      this.setState(state => ({
-        images: [ ...state.images, ...data.hits],
-      }));
+      } else {
+
+        this.setState(state => ({
+          images: [...state.images, ...data.hits],
+        }));
+      }
 
     } catch (error) {
+      toast.error('Sorry, wrong request, try update the page')
       this.setState({ error });
     } finally {
       this.setState({ isLoading: false });
     }
   };
-
-    openModal = largeImage => {
-      this.setState({ showModal: true, largeImage });
-      
-    };
-  
-    
+   
 
 
     render() {
@@ -87,7 +95,7 @@ export class App extends Component {
         {isLoading && <Loader/>}
         <ImageGallery images = {images}/>
         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
-        {images.length > 12 && <Button loadMore={this.loadMore} />}
+        {images.length > 0 && <Button loadMore={this.loadMore} />}
         {isLoading && <Loader/>}
         <ToastContainer autoClose={3000} />
       </div>
