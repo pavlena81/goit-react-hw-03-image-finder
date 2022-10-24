@@ -26,7 +26,8 @@ export class App extends Component {
   handleSubmit = searchInput => {
     
     this.setState({  
-      
+      page: 1,
+      images:[],
       query: searchInput
     });
     // e.target.reset();
@@ -96,7 +97,7 @@ export class App extends Component {
         <ImageGallery images = {images}/>
         {/* {images.length > 0 ? <ImagesList images={images} /> : null } */}
         {images.length > 0 && <Button loadMore={this.loadMore} />}
-        {isLoading && <Loader/>}
+        {/* {isLoading && <Loader/>} */}
         <ToastContainer autoClose={3000} />
       </div>
     );
